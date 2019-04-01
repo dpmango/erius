@@ -1,0 +1,38 @@
+{
+	'functions': true
+}
+
+$sprite: (
+	{{#items}}
+	{{name}}: (
+		offset-x: {{px.offset_x}},
+		offset-y: {{px.offset_y}},
+		image: '{{{escaped_image}}}'
+	),
+	{{/items}}
+);
+
+{{#options.functions}}
+
+
+@mixin sprite-position($image) {
+	background-position: map-get(map-get($sprite, $image), 'offset-x') map-get(map-get($sprite, $image), 'offset-y');
+}
+
+@mixin sprite-image($image) {
+	background-image: url(map-get(map-get($sprite, $image), 'image'));
+}
+
+@mixin sprite($image) {
+	@include sprite-image($image);
+	@include sprite-position($image);
+}
+
+{{/options.functions}}
+
+
+{{#items}}
+	.animation-bg-{{name}} {
+		@include sprite({{name}})
+	}
+{{/items}}

@@ -294,10 +294,10 @@ $(function () {
     init: function () {
       this.generateUrls();
 
-      // this.preloadAll();
+      this.preloadAll(); // butch it's much faster
       // first image load which will recursevelly call next one by one
       // will not block direct background-src for APP.Animation
-      this.preloadSingle(this.data.imageUrls[0], 0);
+      // this.preloadSingle(this.data.imageUrls[0], 0);
     },
 
     generateUrls: function () {
@@ -306,7 +306,7 @@ $(function () {
       }
     },
 
-    preload: function (arr) {
+    preloadAll: function (arr) {
       var arr = this.data.imageUrls;
       for (var i = 0; i < arr.length; i++) {
         this.data.imageCache[i] = new Image();

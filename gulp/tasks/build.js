@@ -3,13 +3,13 @@ var runSequence = require("run-sequence");
 var config = require("../config");
 
 // set build evnironment first and perform build() function
-gulp.task("build:production", function(callback) {
+gulp.task("build:production", function (callback) {
   config.setEnv("production");
   config.logEnv();
   build(callback);
 });
 
-gulp.task("build:development", function(callback) {
+gulp.task("build:development", function (callback) {
   config.setEnv("development");
   config.logEnv();
   build(callback);
@@ -21,6 +21,7 @@ function build(callback) {
     "sass",
     "pug",
     "javascript",
+    // "sprite:png",
     "images",
     "copy",
     callback
