@@ -1794,6 +1794,8 @@ ul
   display: flex
   flex-direction: column
   pointer-events: none
+  transform: translate3d(0,0,0)
+  backface-visibility: hidden
   &__holder
     position: relative
     flex: 1 1 auto
@@ -1806,6 +1808,8 @@ ul
       background-position: top center
       background-size: cover
       width: 80vh
+      will-change: background
+      transition: background .2s linear
 
 @media (max-width: 1000px)
   .animation

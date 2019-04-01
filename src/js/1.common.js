@@ -287,22 +287,41 @@ $(function () {
 (function ($, APP) {
   APP.PreloadImages = {
     data: {
-      images: []
+      imageUrls: [],
+      imageCache: []
     },
 
     init: function () {
-      var allImages = [];
+      this.generateUrls();
+
+      // this.preloadAll();
+      // first image load which will recursevelly call next one by one
+      // will not block direct background-src for APP.Animation
+      this.preloadSingle(this.data.imageUrls[0], 0);
+    },
+
+    generateUrls: function () {
       for (var i = 0; i < 400; i++) {
-        allImages.push(imagePath(i + 1))
+        this.data.imageUrls.push(imagePath(i + 1))
       }
-      this.preload(allImages);
     },
 
     preload: function (arr) {
+      var arr = this.data.imageUrls;
       for (var i = 0; i < arr.length; i++) {
-        this.data.images[i] = new Image();
-        this.data.images[i].src = arr[i];
+        this.data.imageCache[i] = new Image();
+        this.data.imageCache[i].src = arr[i];
       }
+    },
+
+    preloadSingle: function (src, index) {
+      if (index >= this.data.imageUrls.length) return
+      var _this = this;
+      this.data.imageCache[index] = new Image();
+      this.data.imageCache[index].onload = function () {
+        _this.preloadSingle(_this.data.imageUrls[index + 1], index + 1)
+      };
+      this.data.imageCache[index].src = src;
     }
   }
 })(jQuery, window.APP);
@@ -335,7 +354,7 @@ $(function () {
     },
 
     runListeners: function () {
-      _window.on('scroll', this.animate.bind(this));
+      _window.on('scroll', throttle(this.animate.bind(this), 10));
       _window.on('resize', debounce(this.getParams.bind(this), 100));
     },
 
@@ -364,6 +383,7 @@ $(function () {
 
       // update image
       var imgPath = imagePath(reverseNormalized);
+      // TODO - use cache
       this.data.background.css({
         'background-image': 'url("' + imgPath + '")',
       });
