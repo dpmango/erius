@@ -354,7 +354,7 @@ $(function () {
     },
 
     runListeners: function () {
-      _window.on('scroll', throttle(this.animate.bind(this), 10));
+      _window.on('scroll', this.animate.bind(this));
       _window.on('resize', debounce(this.getParams.bind(this), 100));
     },
 
