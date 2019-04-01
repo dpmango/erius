@@ -1,3 +1,5 @@
+"use strict";
+
 document.addEventListener('DOMContentLoaded', function () {
   var mainElem = document.querySelector('.main'),
     img3Elem = document.querySelector('.img-block-3'),
@@ -24,12 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       for (var i = 0; i < imgBlockElements.length; i++) {
         var elem = imgBlockElements[i];
-
         elem.classList.add('free');
-
-        elem.parentElement.style.height =
-          elem.parentElement.offsetHeight + 'px';
-
+        elem.parentElement.style.height = elem.parentElement.offsetHeight + 'px';
         elem.classList.remove('free');
       }
     }
@@ -51,9 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         elem.classList.remove('fix');
         elem.classList.remove('abs');
         elem.classList.remove('free');
-
         elem.style.left = 0;
-
         elem.style.left = elem.getBoundingClientRect().left + 'px';
       }
 
@@ -78,112 +74,77 @@ document.addEventListener('DOMContentLoaded', function () {
   function scrollBg() {
     if (!document.body.classList.contains('popup-is-opened')) {
       // bg
-      mainElem.style.backgroundPosition = '0 -' + window.pageYOffset / 2 + 'px';
-
-      // images
+      mainElem.style.backgroundPosition = '0 -' + window.pageYOffset / 2 + 'px'; // images
       // console.log(fstScreenElem.getBoundingClientRect().bottom, (window.innerHeight / 3) * 2);
 
-      if (
-        fstScreenElem.getBoundingClientRect().bottom + 50 <=
-        window.innerHeight / 2 + 50
-      ) {
+      if (fstScreenElem.getBoundingClientRect().bottom + 50 <= window.innerHeight / 2 + 50) {
         setPosImgBlock('fix');
       } else {
         setPosImgBlock('abs');
-      }
+      } // img 2
 
-      // img 2
-      if (
-        img2PointElem.getBoundingClientRect().top <=
-        window.innerHeight / 2 + 50
-      ) {
+
+      if (img2PointElem.getBoundingClientRect().top <= window.innerHeight / 2 + 50) {
         img2Elem.classList.add('free');
         img2Elem.classList.add('free-2');
-      } else if (
-        img2PointElem.getBoundingClientRect().top <=
-        window.innerHeight / 2 + 50 + 110
-      ) {
+      } else if (img2PointElem.getBoundingClientRect().top <= window.innerHeight / 2 + 50 + 110) {
         img2Elem.classList.add('free');
         img2Elem.classList.remove('free-2');
-      } else if (
-        img2PointElem.getBoundingClientRect().top >=
-        window.innerHeight / 2 + 50 + 110
-      ) {
+      } else if (img2PointElem.getBoundingClientRect().top >= window.innerHeight / 2 + 50 + 110) {
         img2Elem.classList.remove('free');
         img2Elem.classList.remove('free-2');
-      }
+      } //img 4
 
-      //img 4
-      if (
-        img4PointElem.getBoundingClientRect().top <=
-        window.innerHeight / 2 + 50 + 220
-      ) {
+
+      if (img4PointElem.getBoundingClientRect().top <= window.innerHeight / 2 + 50 + 220) {
         img4Elem.classList.add('free');
       } else {
         img4Elem.classList.remove('free');
-      }
+      } //img 5
 
-      //img 5
-      if (
-        img5PointElem.getBoundingClientRect().top <=
-        window.innerHeight / 2 + 50
-      ) {
+
+      if (img5PointElem.getBoundingClientRect().top <= window.innerHeight / 2 + 50) {
         img5Elem.classList.add('free');
       } else {
         img5Elem.classList.remove('free');
-      }
+      } // blocks
 
-      // blocks
+
       for (var i = 0; i < blockElements.length; i++) {
         var blockElem = blockElements[i];
 
-        if (
-          blockElem.getBoundingClientRect().top <=
-          window.innerHeight / 2 + 50 ||
-          (blockElem.classList.contains('block_last') &&
-            blockElem.getBoundingClientRect().top <= window.innerHeight - 100)
-        ) {
+        if (blockElem.getBoundingClientRect().top <= window.innerHeight / 2 + 50 || blockElem.classList.contains('block_last') && blockElem.getBoundingClientRect().top <= window.innerHeight - 100) {
           blockElem.classList.add('vis');
         } else {
           blockElem.classList.remove('vis');
         }
-      }
+      } // img sirop
 
-      // img sirop
+
       var img3Offset = img3Elem.getBoundingClientRect();
 
       if (img3OffsetBottom >= img3PointBotElem.getBoundingClientRect().top) {
-        img3Elem.style.top =
-          img3PointBotElem.getBoundingClientRect().top +
-          window.pageYOffset -
-          img3Elem.offsetHeight +
-          'px';
+        img3Elem.style.top = img3PointBotElem.getBoundingClientRect().top + window.pageYOffset - img3Elem.offsetHeight + 'px';
         img3Elem.style.left = img3Offset.left + 'px';
         img3Elem.classList.add('abs');
         img3Elem.classList.remove('fix');
         img3Elem.parentElement.style.height = img3Elem.offsetHeight + 20 + 'px';
-      } else if (
-        window.innerHeight / 2 - 190 >=
-        img3PointElem.getBoundingClientRect().top
-      ) {
+      } else if (window.innerHeight / 2 - 190 >= img3PointElem.getBoundingClientRect().top) {
         img3Elem.style.top = window.innerHeight / 2 - 190 + 'px';
         img3Elem.style.left = img3Offset.left + 'px';
         img3Elem.classList.add('fix');
         img3Elem.classList.remove('abs');
         img3Elem.parentElement.style.height = img3Elem.offsetHeight + 20 + 'px';
         img3OffsetBottom = window.innerHeight / 2 - 190 + img3Elem.offsetHeight;
-      } else if (
-        window.innerHeight / 2 - 190 <
-        img3PointElem.getBoundingClientRect().top
-      ) {
+      } else if (window.innerHeight / 2 - 190 < img3PointElem.getBoundingClientRect().top) {
         img3Elem.style.top = '';
         img3Elem.style.left = '';
         img3Elem.classList.remove('fix');
         img3Elem.classList.remove('abs');
         img3OffsetBottom = 0;
-      }
+      } // arrows
 
-      // arrows
+
       for (var i = 0; i < arrElements.length; i++) {
         var arrElem = arrElements[i];
 
@@ -195,88 +156,82 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
-
   /* function smoothScroll(st) {
- 	
- 	Math.easeOut = function (t, b, c, d) { t /= d; return -c * t*(t-2) + b; };
- 	
- 	var interval, // scroll is being eased
- 	mult = 0, // how fast do we scroll
- 	dir = 0, // 1 = scroll down, -1 = scroll up
- 	steps = 100, // how many steps in animation
- 	length = 30; // how long to animate
- 	function MouseWheelHandler(e) {
- 		if (!document.body.classList.contains('popup-is-opened')) {
- 			e.preventDefault(); // prevent default browser scroll
- 			clearInterval(interval); // cancel previous animation
- 			++mult; // we are going to scroll faster
- 			var delta = Math.max(-1, Math.min(1, (e.deltaY)));
- 			if(dir!=delta) { // scroll direction changed
- 				mult = 1; // start slowly
- 				dir = delta;
- 			}
- 			for(var tgt=e.target; tgt!=document.documentElement; tgt=tgt.parentNode) {
- 				var oldScroll = tgt.scrollTop;
- 				tgt.scrollTop+= delta;
- 				if(oldScroll!=tgt.scrollTop) break;
- 			}
- 			var start = tgt.scrollTop;
- 			var end = start + length*mult*delta; // where to end the scroll
- 			var change = end - start; // base change in one step
- 			var step = 0; // current step
- 			interval = setInterval(function() {
- 				var pos = Math.easeOut(step++,start,change,steps);
- 				// window.scrollTo(0,pos);
- 				tgt.scrollTop = pos;
- 				if(step>=steps) { // scroll finished without speed up - stop by easing out
- 					mult = 0;
- 					clearInterval(interval);
- 				}
- 			},10);
- 		}
- 	}
- 	
- 	if (st) {
- 		document.addEventListener('wheel', MouseWheelHandler);
- 	} else {
- 		document.removeEventListener('wheel', MouseWheelHandler);
- 	}
- } */
+  
+  Math.easeOut = function (t, b, c, d) { t /= d; return -c * t*(t-2) + b; };
+  
+  var interval, // scroll is being eased
+  mult = 0, // how fast do we scroll
+  dir = 0, // 1 = scroll down, -1 = scroll up
+  steps = 100, // how many steps in animation
+  length = 30; // how long to animate
+  function MouseWheelHandler(e) {
+  	if (!document.body.classList.contains('popup-is-opened')) {
+  		e.preventDefault(); // prevent default browser scroll
+  		clearInterval(interval); // cancel previous animation
+  		++mult; // we are going to scroll faster
+  		var delta = Math.max(-1, Math.min(1, (e.deltaY)));
+  		if(dir!=delta) { // scroll direction changed
+  			mult = 1; // start slowly
+  			dir = delta;
+  		}
+  		for(var tgt=e.target; tgt!=document.documentElement; tgt=tgt.parentNode) {
+  			var oldScroll = tgt.scrollTop;
+  			tgt.scrollTop+= delta;
+  			if(oldScroll!=tgt.scrollTop) break;
+  		}
+  		var start = tgt.scrollTop;
+  		var end = start + length*mult*delta; // where to end the scroll
+  		var change = end - start; // base change in one step
+  		var step = 0; // current step
+  		interval = setInterval(function() {
+  			var pos = Math.easeOut(step++,start,change,steps);
+  			// window.scrollTo(0,pos);
+  			tgt.scrollTop = pos;
+  			if(step>=steps) { // scroll finished without speed up - stop by easing out
+  				mult = 0;
+  				clearInterval(interval);
+  			}
+  		},10);
+  	}
+  }
+  
+  if (st) {
+  	document.addEventListener('wheel', MouseWheelHandler);
+  } else {
+  	document.removeEventListener('wheel', MouseWheelHandler);
+  }
+  } */
+
 
   (function initFun() {
     if (window.innerWidth > 1000) {
       mainElem.style.backgroundSize = window.innerWidth + 'px auto';
-
       window.addEventListener('scroll', scrollBg);
-
       setPosImgBlock('abs', 'left');
     } else {
       window.removeEventListener('scroll', scrollBg);
     }
-
     /* if ('onwheel' in document && window.innerWidth > 1000) {
-  	smoothScroll(true);
-  } else {
-  	smoothScroll(false);
-  } */
+    smoothScroll(true);
+    } else {
+    smoothScroll(false);
+    } */
+
 
     window.addEventListener('winResized', initFun);
-  })();
+  })(); //popup init
 
-  //popup init
-  Popup.init('.js-open-popup');
 
-  //bubble
+  Popup.init('.js-open-popup'); //bubble
+
   Bubble.init({
     element: '.js-bubble'
-  });
+  }); //anchor
 
-  //anchor
   Anchor.init('.js-anchor', 700, 100);
+  Toggle.init('.js-toggle'); //submit form
 
-  Toggle.init('.js-toggle');
-
-  //submit form
   Form.init('.form');
 
   Form.onSubmit = function () {
@@ -300,16 +255,17 @@ document.addEventListener('DOMContentLoaded', function () {
     name = elem.innerHTML.replace(/\<button.*?\>.*?\<\/button\>/g, '');
     name = name.replace(/\<.*?\>/g, '');
     name = name.replace(/\s+|&nbsp;/g, ' ');
-
-    srcData.push({ val: id, name });
+    srcData.push({
+      val: id,
+      name: name
+    });
   }
 
   AutoComplete.valuesData = srcData;
 });
 
-
 // Pre-init to prevent empty objects
-APP = window.APP || {};
+var APP = window.APP || {};
 
 // shorthand operators
 var _window = $(window);
@@ -369,7 +325,8 @@ $(function () {
     },
 
     init: function (params) {
-      this.getParams(params.element);
+      this.params = params;
+      this.getParams();
       this.runListeners();
     },
 
@@ -382,16 +339,14 @@ $(function () {
       _window.on('resize', debounce(this.getParams.bind(this), 100));
     },
 
-    getParams: function (el) {
+    getParams: function () {
       // set containers
-      this.data.container = $(el);
-      this.data.background = $(el).find('[js-set-background]');
+      this.data.container = $(this.params.element);
+      this.data.background = $(this.params.element).find('[js-set-background]');
 
       // get window params
       this.data.page.height = _window.height();
       this.data.page.totalScrollHeight = _document.height() - _window.height();
-
-      return this.data
     },
 
     animate: function () {
@@ -406,8 +361,6 @@ $(function () {
       var normalized = Math.floor(normalize(wScroll, _this.data.page.totalScrollHeight, 0, 0, _this.data.frames.total));
       var reverseNormalized = _this.data.frames.total - normalized;
       this.data.frames.current = reverseNormalized;
-
-      console.log(normalized);
 
       // update image
       var imgPath = imagePath(reverseNormalized);
