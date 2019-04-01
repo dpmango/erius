@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var mainElem = document.querySelector('.main'),
     img3Elem = document.querySelector('.img-block-3'),
     img3PointElem = document.getElementById('img-3-point'),
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     img5PointElem = document.getElementById('img-5-point'),
     findTextElements = document.querySelectorAll('.find-block');
 
-  window.onload = function() {
+  window.onload = function () {
     if (window.innerWidth > 1000) {
-      setTimeout(function() {
+      setTimeout(function () {
         window.scrollTo(0, 0);
       }, 21);
 
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (
           blockElem.getBoundingClientRect().top <=
-            window.innerHeight / 2 + 50 ||
+          window.innerHeight / 2 + 50 ||
           (blockElem.classList.contains('block_last') &&
             blockElem.getBoundingClientRect().top <= window.innerHeight - 100)
         ) {
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
   //submit form
   Form.init('.form');
 
-  Form.onSubmit = function() {
+  Form.onSubmit = function () {
     return false;
   };
 
@@ -306,3 +306,147 @@ document.addEventListener('DOMContentLoaded', function() {
 
   AutoComplete.valuesData = srcData;
 });
+
+
+// Pre-init to prevent empty objects
+APP = window.APP || {};
+
+// shorthand operators
+var _window = $(window);
+var _document = $(document);
+var easingSwing = [0.02, 0.01, 0.47, 1];
+
+// force scroll to top on initial load
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
+
+$(function () {
+  APP.PreloadImages.init();
+  APP.Animation.init({
+    element: '[js-animation]'
+  });
+});
+
+(function ($, APP) {
+  APP.PreloadImages = {
+    data: {
+      images: []
+    },
+
+    init: function () {
+      var allImages = [];
+      for (var i = 0; i < 400; i++) {
+        allImages.push(imagePath(i + 1))
+      }
+      this.preload(allImages);
+    },
+
+    preload: function (arr) {
+      for (var i = 0; i < arr.length; i++) {
+        this.data.images[i] = new Image();
+        this.data.images[i].src = arr[i];
+      }
+    }
+  }
+})(jQuery, window.APP);
+
+
+(function ($, APP) {
+  APP.Animation = {
+
+    data: {
+      container: undefined,
+      background: undefined,
+      frames: {
+        total: 400,
+        current: 0
+      },
+      page: {
+        height: 0,
+        totalScrollHeight: 0
+      }
+    },
+
+    init: function (params) {
+      this.getParams(params.element);
+      this.runListeners();
+    },
+
+    destroy: function () {
+      console.log('should be destroyed ?');
+    },
+
+    runListeners: function () {
+      _window.on('scroll', this.animate.bind(this));
+      _window.on('resize', debounce(this.getParams.bind(this), 100));
+    },
+
+    getParams: function (el) {
+      // set containers
+      this.data.container = $(el);
+      this.data.background = $(el).find('[js-set-background]');
+
+      // get window params
+      this.data.page.height = _window.height();
+      this.data.page.totalScrollHeight = _document.height() - _window.height();
+
+      return this.data
+    },
+
+    animate: function () {
+      if (this.data.background === undefined) {
+        return false
+      }
+
+      var _this = this; // just an {} ref
+      var wScroll = _window.scrollTop();
+
+      // normalize scroll position to frames
+      var normalized = Math.floor(normalize(wScroll, _this.data.page.totalScrollHeight, 0, 0, _this.data.frames.total));
+      var reverseNormalized = _this.data.frames.total - normalized;
+      this.data.frames.current = reverseNormalized;
+
+      console.log(normalized);
+
+      // update image
+      var imgPath = imagePath(reverseNormalized);
+      this.data.background.css({
+        'background-image': 'url("' + imgPath + '")',
+      });
+    }
+  };
+})(jQuery, window.APP);
+
+
+//////////////////////////////////
+// HELPERS and PROTOTYPE FUNCTIONS
+//////////////////////////////////
+
+// LINEAR NORMALIZATION
+function normalize(value, fromMin, fromMax, toMin, toMax) {
+  var pct = (value - fromMin) / (fromMax - fromMin);
+  var normalized = pct * (toMax - toMin) + toMin;
+
+  //Cap output to min/max
+  if (normalized > toMax) return toMax;
+  if (normalized < toMin) return toMin;
+  return normalized;
+}
+
+// BUILD IMAGE PATH
+// 1_0${id} or 1_0{di}_optimized
+function imagePath(num) {
+  var postfix = num >= 259 ? "_optimized" : ""
+  return 'images/animation/1_' + (num).pad(4) + postfix + '.png'
+}
+
+// Add padding to numbers (a.k.a format by mask 00)
+// use (9).pad(2) // output - 09
+Number.prototype.pad = function (size) {
+  var s = String(this);
+  while (s.length < (size || 2)) {
+    s = '0' + s;
+  }
+  return s;
+};
