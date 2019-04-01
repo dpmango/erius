@@ -22,7 +22,6 @@
     "cheerio": "^1.0.0-rc.2",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
-    "git-scripts": "^0.2.1",
     "gsap": "^2.0.2",
     "gulp": "^3.9.1",
     "gulp-cache": "^1.0.2",
