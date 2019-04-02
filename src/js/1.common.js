@@ -288,7 +288,11 @@ $(function () {
   APP.PreloadImages = {
     data: {
       imageUrls: [],
-      imageCache: []
+      imageCache: [],
+      imageSprite: {
+        cached: new Image(),
+        isLoaded: false
+      },
     },
 
     init: function () {
@@ -298,6 +302,7 @@ $(function () {
       // first image load which will recursevelly call next one by one
       // will not block direct background-src for APP.Animation
       // this.preloadSingle(this.data.imageUrls[0], 0);
+      this.preloadSprite();
     },
 
     generateUrls: function () {
@@ -322,6 +327,15 @@ $(function () {
         _this.preloadSingle(_this.data.imageUrls[index + 1], index + 1)
       };
       this.data.imageCache[index].src = src;
+    },
+
+    preloadSprite: function () {
+      var _this = this;
+      this.data.imageSprite.cached.onload = function () {
+        _this.data.imageSprite.isLoaded = true;
+        console.log('sprite is loaded');
+      };
+      this.data.imageSprite.cached.src = 'images/sprite.png';
     }
   }
 })(jQuery, window.APP);

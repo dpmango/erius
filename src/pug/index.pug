@@ -41,6 +41,7 @@ html(lang='ru')
         .animation__holder
           div(js-set-background style="background-image: url('images/animation/1_0000.png') ")
 
+      // первый блок (упаковка)
       .first-screen
         .first-screen__inner
           .row.row_wrp
@@ -130,6 +131,7 @@ html(lang='ru')
                   span.i
                     img(src='images/icon-10.svg', alt='icon')
                   | кожный зуд
+      
       .row.row_wrp.section
         .col-4
           .block.block_br.sm-mt-0.find-block
@@ -191,6 +193,88 @@ html(lang='ru')
             br
             |  (седация) не превышает 1 случая на 10 000 пациентов.
         .row__br.pt-40
+      
+      // КОНЕЦ первый блок (упаковка)
+
+      // Второй блок (бутылочка)
+      .row.row_wrp.section.mb-0
+        .col-4-5
+          .block.find-block
+            h2.tit
+              | Этикетка
+            ul
+              li
+                | Сироп 60 мл во флаконах
+                br
+                |  из темного стекла
+              li
+                | Активное вещество — дезлоратадин
+              li
+                | Разрешен к применению
+                br
+                |  с 6-месячного возраста
+              li
+                | Действие начинается в течение
+                br
+                |  30 минут
+              li
+                | Эффект сохраняется до 24 часов
+            .arr.arr_v5
+              img(src='images/arr-5.svg', alt='arr')
+            .sm-arr.sm-arr_v2
+              img(src='images/arr-mob-1.svg', alt='arr')
+        .col-3.ta-c.sm-col-first
+          #img-4-point
+          .img-block.img-block-4
+            img(src='images/etiketka.png', alt='arrow')
+            button.js-bubble.vt-btn(data-bubble='<span class="bubble__tit">Этикетка</span> Сироп Эриус<sup>®</sup> получил обновленный дизайн в 2018 году.  После вскрытия препарат эффективен до окончания срока годности, который указан на этикетке.', data-bubble-class='bubble_v5') i
+    
+      .row.row_wrp.mt-10
+        .col-4
+          .block.mt-200.find-block
+            h2.tit
+              | Флакон
+              button.js-open-popup.btn.sm-ml-10(data-popup='#temperatura-hraneniya-popup') ?
+            | 					Сироп Эриус
+            sup ®
+            |  выпускается
+            br
+            |  во флаконе из темного стекла
+            br
+            |  и хранится при температуре
+            br
+            |  до +30 °C.  После вскрытия
+            br
+            |  препарат эффективен
+            br
+            |  до окончания срока годности.
+            .arr.arr_v7
+              img(src='images/arr-7.svg', alt='arr')
+            .sm-arr.sm-arr_v3
+              img(src='images/arr-mob-1.svg', alt='arr')
+        .col-4
+          #img-5-point
+          .img-block.img-block-5
+            img(src='images/bottle.png', alt='bottle')
+            button.js-bubble.vt-btn.vt-btn_v1(data-bubble='<span class="bubble__tit">Флакон</span> Прозрачный стеклянный флакон темно-коричневого цвета.', data-bubble-class='bubble_v6') i
+            button.js-bubble.vt-btn.vt-btn_v2(data-bubble='<span class="bubble__tit">Ложечка</span> Дозировочная ложка из прозрачного пластика.', data-bubble-class='bubble_v7') i
+        .col-4
+          .block.sm-mt-0.find-block
+            h2.tit
+              | Ложечка
+            | 					Дозировочная ложка с отметками
+            br
+            |  в полости на 2,5 и 5 мл помогает отмерить необходимое количество сиропа.
+            .arr.arr_v6
+              img(src='images/arr-6.svg', alt='arr')
+            .sm-arr.sm-arr_v4
+              img(src='images/arr-mob-2.svg', alt='arr')
+      
+      
+      // КОНЕЦ Второй блок (бутылочка)
+      
+      // Третий блок (ложка с сиропом)
+      .row.row_wrp.row_md-x-block.section
         .col-4
           .block.find-block
             h2.tit
@@ -320,78 +404,11 @@ html(lang='ru')
             |  в сутки для всех пациентов,
             br
             |  независимо от возраста.
-      .row.row_wrp.section.mb-0
-        .col-4-5
-          .block.find-block
-            h2.tit
-              | Этикетка
-            ul
-              li
-                | Сироп 60 мл во флаконах
-                br
-                |  из темного стекла
-              li
-                | Активное вещество — дезлоратадин
-              li
-                | Разрешен к применению
-                br
-                |  с 6-месячного возраста
-              li
-                | Действие начинается в течение
-                br
-                |  30 минут
-              li
-                | Эффект сохраняется до 24 часов
-            .arr.arr_v5
-              img(src='images/arr-5.svg', alt='arr')
-            .sm-arr.sm-arr_v2
-              img(src='images/arr-mob-1.svg', alt='arr')
-        .col-3.ta-c.sm-col-first
-          #img-4-point
-          .img-block.img-block-4
-            img(src='images/etiketka.png', alt='arrow')
-            button.js-bubble.vt-btn(data-bubble='<span class="bubble__tit">Этикетка</span> Сироп Эриус<sup>®</sup> получил обновленный дизайн в 2018 году.  После вскрытия препарат эффективен до окончания срока годности, который указан на этикетке.', data-bubble-class='bubble_v5') i
+      
+      // КОНЕЦ Третий блок (ложка с сиропом)
+
+      // Финал
       .section.mt-10
-        .row.row_wrp
-          .col-4
-            .block.mt-200.find-block
-              h2.tit
-                | Флакон
-                button.js-open-popup.btn.sm-ml-10(data-popup='#temperatura-hraneniya-popup') ?
-              | 					Сироп Эриус
-              sup ®
-              |  выпускается
-              br
-              |  во флаконе из темного стекла
-              br
-              |  и хранится при температуре
-              br
-              |  до +30 °C.  После вскрытия
-              br
-              |  препарат эффективен
-              br
-              |  до окончания срока годности.
-              .arr.arr_v7
-                img(src='images/arr-7.svg', alt='arr')
-              .sm-arr.sm-arr_v3
-                img(src='images/arr-mob-1.svg', alt='arr')
-          .col-4
-            #img-5-point
-            .img-block.img-block-5
-              img(src='images/bottle.png', alt='bottle')
-              button.js-bubble.vt-btn.vt-btn_v1(data-bubble='<span class="bubble__tit">Флакон</span> Прозрачный стеклянный флакон темно-коричневого цвета.', data-bubble-class='bubble_v6') i
-              button.js-bubble.vt-btn.vt-btn_v2(data-bubble='<span class="bubble__tit">Ложечка</span> Дозировочная ложка из прозрачного пластика.', data-bubble-class='bubble_v7') i
-          .col-4
-            .block.sm-mt-0.find-block
-              h2.tit
-                | Ложечка
-              | 					Дозировочная ложка с отметками
-              br
-              |  в полости на 2,5 и 5 мл помогает отмерить необходимое количество сиропа.
-              .arr.arr_v6
-                img(src='images/arr-6.svg', alt='arr')
-              .sm-arr.sm-arr_v4
-                img(src='images/arr-mob-2.svg', alt='arr')
         .row.row_wrp.mt-30.sm-mt-0
           .col-4.col-offset-1
             .block.block_last.mt-100.find-block
@@ -420,6 +437,8 @@ html(lang='ru')
               br
               | 					Взрослым и подросткам от 12 лет — по 5 мг (10 мл сиропа) 1 раз в день.
     // /MAIN
+    
+    
     // FOOTER/
     footer.footer
       div
