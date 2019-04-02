@@ -302,7 +302,7 @@ $(function () {
       // first image load which will recursevelly call next one by one
       // will not block direct background-src for APP.Animation
       // this.preloadSingle(this.data.imageUrls[0], 0);
-      this.preloadSprite();
+      // this.preloadSprite();
     },
 
     generateUrls: function () {
@@ -349,7 +349,8 @@ $(function () {
       background: undefined,
       frames: {
         total: 400,
-        current: 0
+        current: 0,
+        lockedFrame: 0,
       },
       sections: [
         {
@@ -363,7 +364,7 @@ $(function () {
         {
           // bottle
           id: 2,
-          framerate: 2,
+          framerate: 1,
           frames: [220, 240],
           startPoint: null,
           endPoint: null
@@ -371,7 +372,7 @@ $(function () {
         {
           // liquid
           id: 3,
-          framerate: 1,
+          framerate: 2,
           frames: [240, 400],
           startPoint: null,
           endPoint: null
@@ -454,7 +455,7 @@ $(function () {
 
       var normalized
       if (!curSection) {
-        normalized = this.data.frames.total;
+        this.setFrame(this.data.frames.total);
       } else if (curSection.id < 4) {
         // normalize scroll position to section frames
         normalized = Math.floor(normalize(
@@ -464,23 +465,32 @@ $(function () {
           curSection.frames[0],
           curSection.frames[1]
         ));
+
+        this.setFrame(normalized, curSection)
         // var reverseNormalized = _this.data.frames.total - normalized;
 
         // var normalized = Math.floor(normalize(wScroll, _this.data.page.totalScrollHeight, 0, 0, _this.data.frames.total));
         // var reverseNormalized = _this.data.frames.total - normalized;
       } else {
-        normalized = this.data.frames.total;
+        this.setFrame(this.data.frames.total);
       }
 
-      this.data.frames.current = normalized;
-      // TODO - how to scip frames ? 
+    },
+    setFrame(num, curSection) {
+      this.data.frames.current = num;
+      // scip frames based on cached last
+      var framesDiff = Math.abs(num - this.data.frames.lockedFrame)
+      var frameRate = curSection ? curSection.framerate : 0;
+      if (framesDiff >= frameRate) {
+        this.data.frames.lockedFrame = num;
 
-      // update image
-      var imgPath = imagePath(normalized);
-      // TODO - use cache
-      this.data.background.css({
-        'background-image': 'url("' + imgPath + '")',
-      });
+        // update image
+        var imgPath = imagePath(num);
+        // TODO - use cache
+        this.data.background.css({
+          'background-image': 'url("' + imgPath + '")',
+        });
+      }
     }
   };
 })(jQuery, window.APP);
