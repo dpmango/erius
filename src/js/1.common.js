@@ -351,6 +351,40 @@ $(function () {
         total: 400,
         current: 0
       },
+      sections: [
+        {
+          // pack
+          id: 1,
+          framerate: 5,
+          frames: [0, 220],
+          startPoint: null,
+          endPoint: null,
+        },
+        {
+          // bottle
+          id: 2,
+          framerate: 2,
+          frames: [220, 240],
+          startPoint: null,
+          endPoint: null
+        },
+        {
+          // liquid
+          id: 3,
+          framerate: 1,
+          frames: [240, 400],
+          startPoint: null,
+          endPoint: null
+        },
+        {
+          id: 4,
+          framerate: null,
+          frames: null,
+          startPoint: null,
+          endPoint: null
+        }
+      ],
+      reverseSections: [],
       page: {
         height: 0,
         totalScrollHeight: 0
@@ -359,8 +393,12 @@ $(function () {
 
     init: function (params) {
       this.params = params;
+      var _this = this;
       this.getParams();
       this.runListeners();
+
+      setTimeout(this.getParams.bind(this), 1500)
+      setTimeout(this.getParams.bind(this), 3500)
     },
 
     destroy: function () {
@@ -373,6 +411,7 @@ $(function () {
     },
 
     getParams: function () {
+      var _this = this;
       // set containers
       this.data.container = $(this.params.element);
       this.data.background = $(this.params.element).find('[js-set-background]');
@@ -380,6 +419,20 @@ $(function () {
       // get window params
       this.data.page.height = _window.height();
       this.data.page.totalScrollHeight = _document.height() - _window.height();
+
+      // get sections params
+      var $sections = $('[js-section]');
+      $sections.each(function (i, sec) {
+        var $sec = $(sec);
+        var dataSec = _this.data.sections[$sec.data('id') - 1];
+        var startOffset = i > 0 ? _this.data.page.height : 0;
+        var endOffset = i > 0 ? 0 : _this.data.page.height;
+        var startPoint = $sec.offset().top - startOffset;
+        dataSec.startPoint = startPoint;
+        dataSec.endPoint = Math.floor(startPoint + $sec.outerHeight() - endOffset + 55);
+      });
+
+      this.data.reverseSections = $.extend([], _this.data.sections).reverse()
     },
 
     animate: function () {
@@ -390,13 +443,40 @@ $(function () {
       var _this = this; // just an {} ref
       var wScroll = _window.scrollTop();
 
-      // normalize scroll position to frames
-      var normalized = Math.floor(normalize(wScroll, _this.data.page.totalScrollHeight, 0, 0, _this.data.frames.total));
-      var reverseNormalized = _this.data.frames.total - normalized;
-      this.data.frames.current = reverseNormalized;
+      // reverse checking to find current section based on scroll
+      var curSection;
+      $.each(_this.data.reverseSections, function (i, sec) {
+        if (wScroll < sec.endPoint) {
+          curSection = sec;
+          return;
+        }
+      })
+
+      var normalized
+      if (!curSection) {
+        normalized = this.data.frames.total;
+      } else if (curSection.id < 4) {
+        // normalize scroll position to section frames
+        normalized = Math.floor(normalize(
+          wScroll - curSection.startPoint,
+          0,
+          curSection.endPoint - curSection.startPoint,
+          curSection.frames[0],
+          curSection.frames[1]
+        ));
+        // var reverseNormalized = _this.data.frames.total - normalized;
+
+        // var normalized = Math.floor(normalize(wScroll, _this.data.page.totalScrollHeight, 0, 0, _this.data.frames.total));
+        // var reverseNormalized = _this.data.frames.total - normalized;
+      } else {
+        normalized = this.data.frames.total;
+      }
+
+      this.data.frames.current = normalized;
+      // TODO - how to scip frames ? 
 
       // update image
-      var imgPath = imagePath(reverseNormalized);
+      var imgPath = imagePath(normalized);
       // TODO - use cache
       this.data.background.css({
         'background-image': 'url("' + imgPath + '")',
