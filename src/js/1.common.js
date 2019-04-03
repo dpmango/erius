@@ -287,9 +287,10 @@ $(function () {
 (function ($, APP) {
   APP.PreloadImages = {
     data: {
-      imageUrls: [], // array of urls
-      imageUrlsById: [], // array of url id's
+      imageUrls: [], // array of all urls
+      imageUrlsById: [], // array of all url id's
       imageCache: [], // preloaded images
+      preloadedFramesIds: [], // preloaded id's
       imageSprite: {
         cached: new Image(),
         isLoaded: false
@@ -340,6 +341,8 @@ $(function () {
           preloadedFrames.push(reqFrame)
         }
       }
+
+      this.data.preloadedFramesIds = preloadedFrames;
 
       for (var i = 0; i < preloadedFrames.length; i++) {
         this.data.imageCache[i] = new Image();
@@ -506,10 +509,14 @@ $(function () {
 
     },
     setFrame: function (num, curSection) {
+      // find in array of preloaded images
+      num = closestInArray(APP.PreloadImages.data.preloadedFramesIds, num);
       this.data.frames.current = num;
       // scip frames based on cached last
       var framesDiff = Math.abs(num - this.data.frames.lockedFrame);
       var frameRate = curSection ? curSection.framerate : 0;
+
+      // TODO - find closest
       if (framesDiff >= frameRate) {
         this.data.frames.lockedFrame = num;
 
@@ -556,3 +563,18 @@ Number.prototype.pad = function (size) {
   }
   return s;
 };
+
+// find closest value in array
+function closestInArray(array, num) {
+  var i = 0;
+  var minDiff = 1000;
+  var ans;
+  for (i in array) {
+    var m = Math.abs(num - array[i]);
+    if (m < minDiff) {
+      minDiff = m;
+      ans = array[i];
+    }
+  }
+  return ans;
+}
