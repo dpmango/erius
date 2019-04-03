@@ -505,10 +505,10 @@ $(function () {
       }
 
     },
-    setFrame(num, curSection) {
+    setFrame: function (num, curSection) {
       this.data.frames.current = num;
       // scip frames based on cached last
-      var framesDiff = Math.abs(num - this.data.frames.lockedFrame)
+      var framesDiff = Math.abs(num - this.data.frames.lockedFrame);
       var frameRate = curSection ? curSection.framerate : 0;
       if (framesDiff >= frameRate) {
         this.data.frames.lockedFrame = num;
@@ -520,7 +520,7 @@ $(function () {
           'background-image': 'url("' + imgPath + '")',
         });
       }
-    }
+    },
   };
 })(jQuery, window.APP);
 
