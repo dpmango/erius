@@ -287,8 +287,9 @@ $(function () {
 (function ($, APP) {
   APP.PreloadImages = {
     data: {
-      imageUrls: [],
-      imageCache: [],
+      imageUrls: [], // array of urls
+      imageUrlsById: [], // array of url id's
+      imageCache: [], // preloaded images
       imageSprite: {
         cached: new Image(),
         isLoaded: false
@@ -306,19 +307,47 @@ $(function () {
     },
 
     generateUrls: function () {
-      for (var i = 0; i < 400; i++) {
-        this.data.imageUrls.push(imagePath(i + 1))
+      for (var i = 0; i < 401; i++) {
+        this.data.imageUrlsById.push(i);
+        this.data.imageUrls.push(imagePath(i));
       }
     },
 
     preloadAll: function (arr) {
       var arr = this.data.imageUrls;
-      for (var i = 0; i < arr.length; i++) {
+      var ids = this.data.imageUrlsById;
+
+      // get only required based on framerate
+      var requiredFrames = [];
+      var sections = APP.Animation.data.sections;
+      for (var i = 0; i < sections.length - 1; i++) {
+        // minus 1 because section id 4 doest contain any frames
+        var section = sections[i];
+        var frames = Math.abs(section.frames[0] - section.frames[1]);
+        for (var f = 0; f <= frames; f++) {
+          // inside sections frames - skip by framerate
+          if (f % section.framerate === 0) {
+            requiredFrames.push(section.frames[0] + f)
+          }
+        }
+      }
+
+      // covert general array to array of target preloaded frames
+      var preloadedFrames = [];
+      for (var i = 0; i < requiredFrames.length; i++) {
+        var reqFrame = requiredFrames[i]; // get val
+        if (ids.indexOf(reqFrame) !== -1) {
+          preloadedFrames.push(reqFrame)
+        }
+      }
+
+      for (var i = 0; i < preloadedFrames.length; i++) {
         this.data.imageCache[i] = new Image();
-        this.data.imageCache[i].src = arr[i];
+        this.data.imageCache[i].src = arr[preloadedFrames[i]];
       }
     },
 
+    // preloadSingle & preloadSprite is not used 
     preloadSingle: function (src, index) {
       if (index >= this.data.imageUrls.length) return
       var _this = this;
@@ -365,7 +394,7 @@ $(function () {
           // bottle
           id: 2,
           framerate: 1,
-          frames: [220, 240],
+          frames: [221, 240],
           startPoint: null,
           endPoint: null
         },
@@ -373,7 +402,7 @@ $(function () {
           // liquid
           id: 3,
           framerate: 2,
-          frames: [240, 400],
+          frames: [241, 401],
           startPoint: null,
           endPoint: null
         },
@@ -394,10 +423,10 @@ $(function () {
 
     init: function (params) {
       this.params = params;
-      var _this = this;
       this.getParams();
       this.runListeners();
 
+      // dirty fix loading dom content and .height() calcs
       setTimeout(this.getParams.bind(this), 1500)
       setTimeout(this.getParams.bind(this), 3500)
     },
