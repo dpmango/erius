@@ -278,7 +278,7 @@ window.onbeforeunload = function () {
 };
 
 $(function () {
-  APP.PreloadImages.init();
+  // APP.PreloadImages.init();  // moved to blocking flow (EoF)
   APP.Animation.init({
     element: '[js-animation]'
   });
@@ -578,3 +578,5 @@ function closestInArray(array, num) {
   }
   return ans;
 }
+
+APP.PreloadImages.init();
