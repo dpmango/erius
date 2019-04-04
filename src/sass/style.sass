@@ -1865,6 +1865,21 @@ div[js-section]
   .img-block-3 .vt-btn_v1
     top: 120%
 
+@media (max-width: 1000px)
+  .img-block-1, .img-block-2, .img-block-3, .img-block-4, .img-block-5
+    img
+      display: none
+      &.img-mobile
+        display: block
+
+  .img-block-5
+    max-width: 200px
+  .img-block-5 .vt-btn_v1
+    top: 85%
+    left: 60%
+
+  .img-block-5 .vt-btn_v2
+    left: 2%
 
 // PRELOADER
 $color-4: #eead68
