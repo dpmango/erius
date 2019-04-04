@@ -300,9 +300,9 @@ $(function () {
     init: function () {
       this.generateUrls();
 
-      this.preloadAll();
-      // first image load which will recursevelly call next one by one
-      // this.preloadSingle(this.data.imageUrls[0], 0);
+      this.buildFrames();
+      // this.preloadAll();
+      this.runListeners();
       this.preloadSprite();
     },
 
@@ -313,7 +313,7 @@ $(function () {
       }
     },
 
-    preloadAll: function (arr) {
+    buildFrames: function (arr) {
       var arr = this.data.imageUrls;
       var ids = this.data.imageUrlsById;
 
@@ -342,45 +342,47 @@ $(function () {
       }
 
       this.data.preloadedFramesIds = preloadedFrames;
+    },
 
-      // loader
-      var shouldPreloadImages = false
+    runListeners: function () {
+      // _window.on('resize', debounce(this.preloadAll.bind(this), 100));
+      _window.on('resize', debounce(this.preloadSprite.bind(this), 100));
+    },
 
-      if (shouldPreloadImages) {
-        for (var i = 0; i < preloadedFrames.length; i++) {
+    preloadAll() {
+      var wWidth = window.innerWidth
+
+      if (wWidth > 1000) {
+        for (var i = 0; i < this.data.preloadedFramesIds.length; i++) {
           this.data.imageCache[i] = new Image();
           // last loaded
-          if (i === preloadedFrames.length - 1) {
+          if (i === this.data.preloadedFramesIds.length - 1) {
             this.data.imageCache[i].onload = function () {
               $('.preloader').addClass('is-loaded');
               $('body').removeClass('body-locked');
             };
           }
-          this.data.imageCache[i].src = arr[preloadedFrames[i]];
+          this.data.imageCache[i].src = arr[this.data.preloadedFramesIds[i]];
         }
+      } else {
+        $('.preloader').addClass('is-loaded');
+        $('body').removeClass('body-locked');
       }
-    },
-
-    // preloadSingle & preloadSprite is not used 
-    preloadSingle: function (src, index) {
-      if (index >= this.data.imageUrls.length) return
-      var _this = this;
-      this.data.imageCache[index] = new Image();
-      this.data.imageCache[index].onload = function () {
-        _this.preloadSingle(_this.data.imageUrls[index + 1], index + 1)
-      };
-      this.data.imageCache[index].src = src;
     },
 
     preloadSprite: function () {
       var _this = this;
-      this.data.imageSprite.cached.onload = function () {
-        _this.data.imageSprite.isLoaded = true;
-        $('.preloader').addClass('is-loaded');
-        $('body').removeClass('body-locked');
-        APP.Animation.data.background.addClass('should-use-sprite');
-      };
-      this.data.imageSprite.cached.src = 'images/sprite.png';
+      var wWidth = window.innerWidth
+
+      if (wWidth > 1000) {
+        this.data.imageSprite.cached.onload = function () {
+          _this.data.imageSprite.isLoaded = true;
+          $('.preloader').addClass('is-loaded');
+          $('body').removeClass('body-locked');
+          APP.Animation.data.background.addClass('should-use-sprite');
+        };
+        this.data.imageSprite.cached.src = 'images/sprite.png';
+      }
     },
   }
 })(jQuery, window.APP);
@@ -487,6 +489,12 @@ $(function () {
 
     animate: function () {
       if (this.data.background === undefined) {
+        return false
+      }
+
+      var wWidth = window.innerWidth
+
+      if (wWidth <= 1000) {
         return false
       }
 
