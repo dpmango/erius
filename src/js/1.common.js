@@ -460,9 +460,10 @@ $(function () {
         var dataSec = _this.data.sections[$sec.data('id') - 1];
         var startOffset = i > 0 ? _this.data.page.height : 0;
         var endOffset = i > 0 ? 0 : _this.data.page.height;
+        var lastOffset = i === 2 ? 250 : 0;
         var startPoint = $sec.offset().top - startOffset;
         dataSec.startPoint = startPoint;
-        dataSec.endPoint = Math.floor(startPoint + $sec.outerHeight() - endOffset + 55);
+        dataSec.endPoint = Math.floor(startPoint + $sec.outerHeight() - endOffset - lastOffset + 55);
       });
 
       this.data.reverseSections = $.extend([], _this.data.sections).reverse()
@@ -475,6 +476,21 @@ $(function () {
 
       var _this = this; // just an {} ref
       var wScroll = _window.scrollTop();
+
+      // define end of animation and stick animation frames
+      if (wScroll > _this.data.sections[2].endPoint) {
+        if (!_this.data.scrolledPastEnd) {
+          _this.data.scrolledPastEnd = true;
+          _this.data.container.addClass('is-stopped');
+          _this.data.container.css({
+            'top': wScroll + 55
+          })
+        }
+      } else {
+        _this.data.scrolledPastEnd = false;
+        _this.data.container.removeClass('is-stopped');
+        _this.data.container.attr('style', '');
+      }
 
       // reverse checking to find current section based on scroll
       var curSection;

@@ -1782,6 +1782,10 @@ ul
     display: none !important
 
 
+// SPRITE
+@import generated/_sprite-png
+
+
 // ANIMATION
 .animation
   position: fixed
@@ -1790,7 +1794,7 @@ ul
   bottom: 55px
   left: 0
   right: 0
-  z-index: 99
+  z-index: 1
   display: flex
   flex-direction: column
   pointer-events: none
@@ -1810,17 +1814,37 @@ ul
       width: 80vh
       will-change: background
       transition: background .2s linear
+  &.is-stopped
+    position: absolute
+    height: calc(100vh - 75px - 55px)
+    // bottom: auto
+
 
 @media (max-width: 1000px)
   .animation
     display: none
 
+div[js-section]
+  position: relative
+  z-index: 2
+
+// OVERWRITING
+
 @media (min-width: 1001px)
   .img-block-1, .img-block-2, .img-block-3, .img-block-4, .img-block-5
     img
-      opacity: 0.2 !important
+      opacity: 0 !important
 
-div[js-section]
-  outline: 2px solid rgba(tomato, .5)
+  .row_flex
 
-@import generated/_sprite-png
+
+  .img-block-2 .vt-btn
+    top: 80%
+  
+  .img-block-5 .vt-btn_v1
+    left: 28%
+  .img-block-5 .vt-btn_v2
+    left: 0%
+  
+  .img-block-3 .vt-btn_v1
+    top: 120%
