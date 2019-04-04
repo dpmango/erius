@@ -1,0 +1,64 @@
+
+// PRELOADER
+$color-4: #eead68
+$color-3: #eec368
+$color-2: #eece68
+$color-1: #eed968
+$color-5: #ee8c68
+
+$color: $color-1, $color-2, $color-3, $color-4, $color-5
+
+=anim
+  @keyframes scale
+    0%
+      transform: scale(1)
+    50%,
+    75%
+      transform: scale(2.5)
+    78%, 100%
+      opacity: 0
+
+.preloader
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 99
+  display: flex
+  justify-content: center
+  align-items: center
+  overflow: hidden
+  animation-delay: 1s
+  transition: opacity .4s ease-in
+  &.is-loaded
+    opacity: 0
+    pointer-events: none
+
+@media (max-width: 1000px)
+  .preloader
+    display: none
+
+@for $i from 1 through 5
+  .preloader-#{$i}
+    width: 20px
+    height: 20px
+    background: #f583a1
+    border-radius: 50%
+    +anim
+    background-color: nth($color, $i)
+    margin: 7px
+    display: flex
+    justify-content: center
+    align-items: center
+    &:before
+      content: ''
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      background-color: nth($color, $i)
+      opacity: 0.7
+      animation: scale 2s infinite cubic-bezier(0, 0, 0.49, 1.02)
+      animation-delay: 200ms * $i
+      transition: 0.5s all ease
+      transform: scale(1)
