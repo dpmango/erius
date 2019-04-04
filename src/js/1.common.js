@@ -344,8 +344,16 @@ $(function () {
 
       this.data.preloadedFramesIds = preloadedFrames;
 
+      // loader
       for (var i = 0; i < preloadedFrames.length; i++) {
         this.data.imageCache[i] = new Image();
+        // last loaded
+        if (i === preloadedFrames.length - 1) {
+          this.data.imageCache[i].onload = function () {
+            $('.preloader').addClass('is-loaded');
+            $('body').removeClass('body-locked');
+          };
+        }
         this.data.imageCache[i].src = arr[preloadedFrames[i]];
       }
     },
@@ -365,7 +373,8 @@ $(function () {
       var _this = this;
       this.data.imageSprite.cached.onload = function () {
         _this.data.imageSprite.isLoaded = true;
-        console.log('sprite is loaded');
+        $('.preloader').addClass('is-loaded');
+        $('body').removeClass('body-locked');
       };
       this.data.imageSprite.cached.src = 'images/sprite.png';
     }
@@ -536,12 +545,21 @@ $(function () {
       if (framesDiff >= frameRate) {
         this.data.frames.lockedFrame = num;
 
-        // update image
-        var imgPath = imagePath(num);
-        // TODO - use cache
-        this.data.background.css({
-          'background-image': 'url("' + imgPath + '")',
-        });
+        var useSprite = false; // temp toggler
+
+        // route sprite loader or direct png
+        if (useSprite && APP.PreloadImages.data.imageSprite.isLoaded) {
+          var spriteClass = spritePath(num);
+          this.data.background.removeClass();
+          this.data.background.addClass(spriteClass);
+          this.data.background.attr('style', '');
+        } else {
+          // update image
+          var imgPath = imagePath(num);
+          this.data.background.css({
+            'background-image': 'url("' + imgPath + '")',
+          });
+        }
       }
     },
   };
@@ -568,6 +586,11 @@ function normalize(value, fromMin, fromMax, toMin, toMax) {
 function imagePath(num) {
   var postfix = num >= 259 ? "_optimized" : ""
   return 'images/animation/1_' + (num).pad(4) + postfix + '.png'
+}
+
+function spritePath(num) {
+  var postfix = num >= 259 ? "_optimized" : ""
+  return 'animation-bg-1_' + (num).pad(4) + postfix
 }
 
 // Add padding to numbers (a.k.a format by mask 00)

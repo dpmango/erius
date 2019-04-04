@@ -18,7 +18,7 @@ var config = {
     img: "src/img",
     svg: "src/img/svg",
     icons: "src/icons",
-    iconsPng: "src/img/animation",
+    iconsPng: "src/img/animation/sprite",
     iconsSvgMono: "src/icons/svg-mono",
     iconsSvgColor: "src/icons/svg-colors",
     iconsFont: "src/icons",
