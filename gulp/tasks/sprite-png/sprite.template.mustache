@@ -24,7 +24,6 @@ $sprite: (
 }
 
 @mixin sprite($image) {
-	@include sprite-image($image);
 	@include sprite-position($image);
 }
 
@@ -32,7 +31,7 @@ $sprite: (
 
 
 {{#items}}
-	.animation-bg-{{name}} {
+	[data-bg="{{name}}"] {
 		@include sprite({{name}})
 	}
 {{/items}}

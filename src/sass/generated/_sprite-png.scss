@@ -737,444 +737,443 @@ $sprite: (
 }
 
 @mixin sprite($image) {
-	@include sprite-image($image);
 	@include sprite-position($image);
 }
 
 
 
-	.animation-bg-1_0000 {
+	[data-bg="1_0000"] {
 		@include sprite(1_0000)
 	}
-	.animation-bg-1_0005 {
+	[data-bg="1_0005"] {
 		@include sprite(1_0005)
 	}
-	.animation-bg-1_0010 {
+	[data-bg="1_0010"] {
 		@include sprite(1_0010)
 	}
-	.animation-bg-1_0015 {
+	[data-bg="1_0015"] {
 		@include sprite(1_0015)
 	}
-	.animation-bg-1_0020 {
+	[data-bg="1_0020"] {
 		@include sprite(1_0020)
 	}
-	.animation-bg-1_0025 {
+	[data-bg="1_0025"] {
 		@include sprite(1_0025)
 	}
-	.animation-bg-1_0030 {
+	[data-bg="1_0030"] {
 		@include sprite(1_0030)
 	}
-	.animation-bg-1_0035 {
+	[data-bg="1_0035"] {
 		@include sprite(1_0035)
 	}
-	.animation-bg-1_0040 {
+	[data-bg="1_0040"] {
 		@include sprite(1_0040)
 	}
-	.animation-bg-1_0045 {
+	[data-bg="1_0045"] {
 		@include sprite(1_0045)
 	}
-	.animation-bg-1_0050 {
+	[data-bg="1_0050"] {
 		@include sprite(1_0050)
 	}
-	.animation-bg-1_0055 {
+	[data-bg="1_0055"] {
 		@include sprite(1_0055)
 	}
-	.animation-bg-1_0060 {
+	[data-bg="1_0060"] {
 		@include sprite(1_0060)
 	}
-	.animation-bg-1_0065 {
+	[data-bg="1_0065"] {
 		@include sprite(1_0065)
 	}
-	.animation-bg-1_0070 {
+	[data-bg="1_0070"] {
 		@include sprite(1_0070)
 	}
-	.animation-bg-1_0075 {
+	[data-bg="1_0075"] {
 		@include sprite(1_0075)
 	}
-	.animation-bg-1_0080 {
+	[data-bg="1_0080"] {
 		@include sprite(1_0080)
 	}
-	.animation-bg-1_0085 {
+	[data-bg="1_0085"] {
 		@include sprite(1_0085)
 	}
-	.animation-bg-1_0090 {
+	[data-bg="1_0090"] {
 		@include sprite(1_0090)
 	}
-	.animation-bg-1_0095 {
+	[data-bg="1_0095"] {
 		@include sprite(1_0095)
 	}
-	.animation-bg-1_0100 {
+	[data-bg="1_0100"] {
 		@include sprite(1_0100)
 	}
-	.animation-bg-1_0105 {
+	[data-bg="1_0105"] {
 		@include sprite(1_0105)
 	}
-	.animation-bg-1_0110 {
+	[data-bg="1_0110"] {
 		@include sprite(1_0110)
 	}
-	.animation-bg-1_0115 {
+	[data-bg="1_0115"] {
 		@include sprite(1_0115)
 	}
-	.animation-bg-1_0120 {
+	[data-bg="1_0120"] {
 		@include sprite(1_0120)
 	}
-	.animation-bg-1_0125 {
+	[data-bg="1_0125"] {
 		@include sprite(1_0125)
 	}
-	.animation-bg-1_0130 {
+	[data-bg="1_0130"] {
 		@include sprite(1_0130)
 	}
-	.animation-bg-1_0135 {
+	[data-bg="1_0135"] {
 		@include sprite(1_0135)
 	}
-	.animation-bg-1_0140 {
+	[data-bg="1_0140"] {
 		@include sprite(1_0140)
 	}
-	.animation-bg-1_0145 {
+	[data-bg="1_0145"] {
 		@include sprite(1_0145)
 	}
-	.animation-bg-1_0150 {
+	[data-bg="1_0150"] {
 		@include sprite(1_0150)
 	}
-	.animation-bg-1_0155 {
+	[data-bg="1_0155"] {
 		@include sprite(1_0155)
 	}
-	.animation-bg-1_0160 {
+	[data-bg="1_0160"] {
 		@include sprite(1_0160)
 	}
-	.animation-bg-1_0165 {
+	[data-bg="1_0165"] {
 		@include sprite(1_0165)
 	}
-	.animation-bg-1_0170 {
+	[data-bg="1_0170"] {
 		@include sprite(1_0170)
 	}
-	.animation-bg-1_0175 {
+	[data-bg="1_0175"] {
 		@include sprite(1_0175)
 	}
-	.animation-bg-1_0180 {
+	[data-bg="1_0180"] {
 		@include sprite(1_0180)
 	}
-	.animation-bg-1_0185 {
+	[data-bg="1_0185"] {
 		@include sprite(1_0185)
 	}
-	.animation-bg-1_0190 {
+	[data-bg="1_0190"] {
 		@include sprite(1_0190)
 	}
-	.animation-bg-1_0195 {
+	[data-bg="1_0195"] {
 		@include sprite(1_0195)
 	}
-	.animation-bg-1_0200 {
+	[data-bg="1_0200"] {
 		@include sprite(1_0200)
 	}
-	.animation-bg-1_0205 {
+	[data-bg="1_0205"] {
 		@include sprite(1_0205)
 	}
-	.animation-bg-1_0210 {
+	[data-bg="1_0210"] {
 		@include sprite(1_0210)
 	}
-	.animation-bg-1_0215 {
+	[data-bg="1_0215"] {
 		@include sprite(1_0215)
 	}
-	.animation-bg-1_0220 {
+	[data-bg="1_0220"] {
 		@include sprite(1_0220)
 	}
-	.animation-bg-1_0221 {
+	[data-bg="1_0221"] {
 		@include sprite(1_0221)
 	}
-	.animation-bg-1_0222 {
+	[data-bg="1_0222"] {
 		@include sprite(1_0222)
 	}
-	.animation-bg-1_0223 {
+	[data-bg="1_0223"] {
 		@include sprite(1_0223)
 	}
-	.animation-bg-1_0224 {
+	[data-bg="1_0224"] {
 		@include sprite(1_0224)
 	}
-	.animation-bg-1_0225 {
+	[data-bg="1_0225"] {
 		@include sprite(1_0225)
 	}
-	.animation-bg-1_0226 {
+	[data-bg="1_0226"] {
 		@include sprite(1_0226)
 	}
-	.animation-bg-1_0227 {
+	[data-bg="1_0227"] {
 		@include sprite(1_0227)
 	}
-	.animation-bg-1_0228 {
+	[data-bg="1_0228"] {
 		@include sprite(1_0228)
 	}
-	.animation-bg-1_0229 {
+	[data-bg="1_0229"] {
 		@include sprite(1_0229)
 	}
-	.animation-bg-1_0230 {
+	[data-bg="1_0230"] {
 		@include sprite(1_0230)
 	}
-	.animation-bg-1_0231 {
+	[data-bg="1_0231"] {
 		@include sprite(1_0231)
 	}
-	.animation-bg-1_0232 {
+	[data-bg="1_0232"] {
 		@include sprite(1_0232)
 	}
-	.animation-bg-1_0233 {
+	[data-bg="1_0233"] {
 		@include sprite(1_0233)
 	}
-	.animation-bg-1_0234 {
+	[data-bg="1_0234"] {
 		@include sprite(1_0234)
 	}
-	.animation-bg-1_0235 {
+	[data-bg="1_0235"] {
 		@include sprite(1_0235)
 	}
-	.animation-bg-1_0236 {
+	[data-bg="1_0236"] {
 		@include sprite(1_0236)
 	}
-	.animation-bg-1_0237 {
+	[data-bg="1_0237"] {
 		@include sprite(1_0237)
 	}
-	.animation-bg-1_0238 {
+	[data-bg="1_0238"] {
 		@include sprite(1_0238)
 	}
-	.animation-bg-1_0239 {
+	[data-bg="1_0239"] {
 		@include sprite(1_0239)
 	}
-	.animation-bg-1_0240 {
+	[data-bg="1_0240"] {
 		@include sprite(1_0240)
 	}
-	.animation-bg-1_0241 {
+	[data-bg="1_0241"] {
 		@include sprite(1_0241)
 	}
-	.animation-bg-1_0243 {
+	[data-bg="1_0243"] {
 		@include sprite(1_0243)
 	}
-	.animation-bg-1_0245 {
+	[data-bg="1_0245"] {
 		@include sprite(1_0245)
 	}
-	.animation-bg-1_0247 {
+	[data-bg="1_0247"] {
 		@include sprite(1_0247)
 	}
-	.animation-bg-1_0249 {
+	[data-bg="1_0249"] {
 		@include sprite(1_0249)
 	}
-	.animation-bg-1_0251 {
+	[data-bg="1_0251"] {
 		@include sprite(1_0251)
 	}
-	.animation-bg-1_0253 {
+	[data-bg="1_0253"] {
 		@include sprite(1_0253)
 	}
-	.animation-bg-1_0255 {
+	[data-bg="1_0255"] {
 		@include sprite(1_0255)
 	}
-	.animation-bg-1_0257 {
+	[data-bg="1_0257"] {
 		@include sprite(1_0257)
 	}
-	.animation-bg-1_0259_optimized {
+	[data-bg="1_0259_optimized"] {
 		@include sprite(1_0259_optimized)
 	}
-	.animation-bg-1_0261_optimized {
+	[data-bg="1_0261_optimized"] {
 		@include sprite(1_0261_optimized)
 	}
-	.animation-bg-1_0263_optimized {
+	[data-bg="1_0263_optimized"] {
 		@include sprite(1_0263_optimized)
 	}
-	.animation-bg-1_0265_optimized {
+	[data-bg="1_0265_optimized"] {
 		@include sprite(1_0265_optimized)
 	}
-	.animation-bg-1_0267_optimized {
+	[data-bg="1_0267_optimized"] {
 		@include sprite(1_0267_optimized)
 	}
-	.animation-bg-1_0269_optimized {
+	[data-bg="1_0269_optimized"] {
 		@include sprite(1_0269_optimized)
 	}
-	.animation-bg-1_0271_optimized {
+	[data-bg="1_0271_optimized"] {
 		@include sprite(1_0271_optimized)
 	}
-	.animation-bg-1_0273_optimized {
+	[data-bg="1_0273_optimized"] {
 		@include sprite(1_0273_optimized)
 	}
-	.animation-bg-1_0275_optimized {
+	[data-bg="1_0275_optimized"] {
 		@include sprite(1_0275_optimized)
 	}
-	.animation-bg-1_0277_optimized {
+	[data-bg="1_0277_optimized"] {
 		@include sprite(1_0277_optimized)
 	}
-	.animation-bg-1_0279_optimized {
+	[data-bg="1_0279_optimized"] {
 		@include sprite(1_0279_optimized)
 	}
-	.animation-bg-1_0281_optimized {
+	[data-bg="1_0281_optimized"] {
 		@include sprite(1_0281_optimized)
 	}
-	.animation-bg-1_0283_optimized {
+	[data-bg="1_0283_optimized"] {
 		@include sprite(1_0283_optimized)
 	}
-	.animation-bg-1_0285_optimized {
+	[data-bg="1_0285_optimized"] {
 		@include sprite(1_0285_optimized)
 	}
-	.animation-bg-1_0287_optimized {
+	[data-bg="1_0287_optimized"] {
 		@include sprite(1_0287_optimized)
 	}
-	.animation-bg-1_0289_optimized {
+	[data-bg="1_0289_optimized"] {
 		@include sprite(1_0289_optimized)
 	}
-	.animation-bg-1_0291_optimized {
+	[data-bg="1_0291_optimized"] {
 		@include sprite(1_0291_optimized)
 	}
-	.animation-bg-1_0293_optimized {
+	[data-bg="1_0293_optimized"] {
 		@include sprite(1_0293_optimized)
 	}
-	.animation-bg-1_0295_optimized {
+	[data-bg="1_0295_optimized"] {
 		@include sprite(1_0295_optimized)
 	}
-	.animation-bg-1_0297_optimized {
+	[data-bg="1_0297_optimized"] {
 		@include sprite(1_0297_optimized)
 	}
-	.animation-bg-1_0299_optimized {
+	[data-bg="1_0299_optimized"] {
 		@include sprite(1_0299_optimized)
 	}
-	.animation-bg-1_0301_optimized {
+	[data-bg="1_0301_optimized"] {
 		@include sprite(1_0301_optimized)
 	}
-	.animation-bg-1_0303_optimized {
+	[data-bg="1_0303_optimized"] {
 		@include sprite(1_0303_optimized)
 	}
-	.animation-bg-1_0305_optimized {
+	[data-bg="1_0305_optimized"] {
 		@include sprite(1_0305_optimized)
 	}
-	.animation-bg-1_0307_optimized {
+	[data-bg="1_0307_optimized"] {
 		@include sprite(1_0307_optimized)
 	}
-	.animation-bg-1_0309_optimized {
+	[data-bg="1_0309_optimized"] {
 		@include sprite(1_0309_optimized)
 	}
-	.animation-bg-1_0311_optimized {
+	[data-bg="1_0311_optimized"] {
 		@include sprite(1_0311_optimized)
 	}
-	.animation-bg-1_0313_optimized {
+	[data-bg="1_0313_optimized"] {
 		@include sprite(1_0313_optimized)
 	}
-	.animation-bg-1_0315_optimized {
+	[data-bg="1_0315_optimized"] {
 		@include sprite(1_0315_optimized)
 	}
-	.animation-bg-1_0317_optimized {
+	[data-bg="1_0317_optimized"] {
 		@include sprite(1_0317_optimized)
 	}
-	.animation-bg-1_0319_optimized {
+	[data-bg="1_0319_optimized"] {
 		@include sprite(1_0319_optimized)
 	}
-	.animation-bg-1_0321_optimized {
+	[data-bg="1_0321_optimized"] {
 		@include sprite(1_0321_optimized)
 	}
-	.animation-bg-1_0323_optimized {
+	[data-bg="1_0323_optimized"] {
 		@include sprite(1_0323_optimized)
 	}
-	.animation-bg-1_0325_optimized {
+	[data-bg="1_0325_optimized"] {
 		@include sprite(1_0325_optimized)
 	}
-	.animation-bg-1_0327_optimized {
+	[data-bg="1_0327_optimized"] {
 		@include sprite(1_0327_optimized)
 	}
-	.animation-bg-1_0329_optimized {
+	[data-bg="1_0329_optimized"] {
 		@include sprite(1_0329_optimized)
 	}
-	.animation-bg-1_0331_optimized {
+	[data-bg="1_0331_optimized"] {
 		@include sprite(1_0331_optimized)
 	}
-	.animation-bg-1_0333_optimized {
+	[data-bg="1_0333_optimized"] {
 		@include sprite(1_0333_optimized)
 	}
-	.animation-bg-1_0335_optimized {
+	[data-bg="1_0335_optimized"] {
 		@include sprite(1_0335_optimized)
 	}
-	.animation-bg-1_0337_optimized {
+	[data-bg="1_0337_optimized"] {
 		@include sprite(1_0337_optimized)
 	}
-	.animation-bg-1_0339_optimized {
+	[data-bg="1_0339_optimized"] {
 		@include sprite(1_0339_optimized)
 	}
-	.animation-bg-1_0341_optimized {
+	[data-bg="1_0341_optimized"] {
 		@include sprite(1_0341_optimized)
 	}
-	.animation-bg-1_0343_optimized {
+	[data-bg="1_0343_optimized"] {
 		@include sprite(1_0343_optimized)
 	}
-	.animation-bg-1_0345_optimized {
+	[data-bg="1_0345_optimized"] {
 		@include sprite(1_0345_optimized)
 	}
-	.animation-bg-1_0347_optimized {
+	[data-bg="1_0347_optimized"] {
 		@include sprite(1_0347_optimized)
 	}
-	.animation-bg-1_0349_optimized {
+	[data-bg="1_0349_optimized"] {
 		@include sprite(1_0349_optimized)
 	}
-	.animation-bg-1_0351_optimized {
+	[data-bg="1_0351_optimized"] {
 		@include sprite(1_0351_optimized)
 	}
-	.animation-bg-1_0353_optimized {
+	[data-bg="1_0353_optimized"] {
 		@include sprite(1_0353_optimized)
 	}
-	.animation-bg-1_0355_optimized {
+	[data-bg="1_0355_optimized"] {
 		@include sprite(1_0355_optimized)
 	}
-	.animation-bg-1_0357_optimized {
+	[data-bg="1_0357_optimized"] {
 		@include sprite(1_0357_optimized)
 	}
-	.animation-bg-1_0359_optimized {
+	[data-bg="1_0359_optimized"] {
 		@include sprite(1_0359_optimized)
 	}
-	.animation-bg-1_0361_optimized {
+	[data-bg="1_0361_optimized"] {
 		@include sprite(1_0361_optimized)
 	}
-	.animation-bg-1_0363_optimized {
+	[data-bg="1_0363_optimized"] {
 		@include sprite(1_0363_optimized)
 	}
-	.animation-bg-1_0365_optimized {
+	[data-bg="1_0365_optimized"] {
 		@include sprite(1_0365_optimized)
 	}
-	.animation-bg-1_0367_optimized {
+	[data-bg="1_0367_optimized"] {
 		@include sprite(1_0367_optimized)
 	}
-	.animation-bg-1_0369_optimized {
+	[data-bg="1_0369_optimized"] {
 		@include sprite(1_0369_optimized)
 	}
-	.animation-bg-1_0371_optimized {
+	[data-bg="1_0371_optimized"] {
 		@include sprite(1_0371_optimized)
 	}
-	.animation-bg-1_0373_optimized {
+	[data-bg="1_0373_optimized"] {
 		@include sprite(1_0373_optimized)
 	}
-	.animation-bg-1_0375_optimized {
+	[data-bg="1_0375_optimized"] {
 		@include sprite(1_0375_optimized)
 	}
-	.animation-bg-1_0377_optimized {
+	[data-bg="1_0377_optimized"] {
 		@include sprite(1_0377_optimized)
 	}
-	.animation-bg-1_0379_optimized {
+	[data-bg="1_0379_optimized"] {
 		@include sprite(1_0379_optimized)
 	}
-	.animation-bg-1_0381_optimized {
+	[data-bg="1_0381_optimized"] {
 		@include sprite(1_0381_optimized)
 	}
-	.animation-bg-1_0383_optimized {
+	[data-bg="1_0383_optimized"] {
 		@include sprite(1_0383_optimized)
 	}
-	.animation-bg-1_0385_optimized {
+	[data-bg="1_0385_optimized"] {
 		@include sprite(1_0385_optimized)
 	}
-	.animation-bg-1_0387_optimized {
+	[data-bg="1_0387_optimized"] {
 		@include sprite(1_0387_optimized)
 	}
-	.animation-bg-1_0389_optimized {
+	[data-bg="1_0389_optimized"] {
 		@include sprite(1_0389_optimized)
 	}
-	.animation-bg-1_0391_optimized {
+	[data-bg="1_0391_optimized"] {
 		@include sprite(1_0391_optimized)
 	}
-	.animation-bg-1_0393_optimized {
+	[data-bg="1_0393_optimized"] {
 		@include sprite(1_0393_optimized)
 	}
-	.animation-bg-1_0395_optimized {
+	[data-bg="1_0395_optimized"] {
 		@include sprite(1_0395_optimized)
 	}
-	.animation-bg-1_0397_optimized {
+	[data-bg="1_0397_optimized"] {
 		@include sprite(1_0397_optimized)
 	}
-	.animation-bg-1_0399_optimized {
+	[data-bg="1_0399_optimized"] {
 		@include sprite(1_0399_optimized)
 	}

@@ -1819,12 +1819,17 @@ ul
     align-items: center
     div
       flex: 1 1 auto
-      background-repeat: no-repeat
-      background-position: top center
-      background-size: cover
-      width: 80vh
-      will-change: background
-      transition: background .2s linear
+      width: 960px
+      height: 960px
+      transform-origin: top center
+      will-change: transform
+      &:not(.should-use-sprite)
+        background-repeat: no-repeat
+        background-position: top center
+        background-size: cover
+      &.should-use-sprite
+        background-image: url("../images/sprite.png");
+
   &.is-stopped
     position: absolute
     height: calc(100vh - 75px - 55px)
@@ -1839,8 +1844,8 @@ div[js-section]
   position: relative
   z-index: 2
 
-// OVERWRITING
 
+// OVERWRITING
 @media (min-width: 1001px)
   .img-block-1, .img-block-2, .img-block-3, .img-block-4, .img-block-5
     img

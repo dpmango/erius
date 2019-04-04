@@ -300,11 +300,10 @@ $(function () {
     init: function () {
       this.generateUrls();
 
-      this.preloadAll(); // butch it's much faster
+      this.preloadAll();
       // first image load which will recursevelly call next one by one
-      // will not block direct background-src for APP.Animation
       // this.preloadSingle(this.data.imageUrls[0], 0);
-      // this.preloadSprite();
+      this.preloadSprite();
     },
 
     generateUrls: function () {
@@ -345,16 +344,20 @@ $(function () {
       this.data.preloadedFramesIds = preloadedFrames;
 
       // loader
-      for (var i = 0; i < preloadedFrames.length; i++) {
-        this.data.imageCache[i] = new Image();
-        // last loaded
-        if (i === preloadedFrames.length - 1) {
-          this.data.imageCache[i].onload = function () {
-            $('.preloader').addClass('is-loaded');
-            $('body').removeClass('body-locked');
-          };
+      var shouldPreloadImages = false
+
+      if (shouldPreloadImages) {
+        for (var i = 0; i < preloadedFrames.length; i++) {
+          this.data.imageCache[i] = new Image();
+          // last loaded
+          if (i === preloadedFrames.length - 1) {
+            this.data.imageCache[i].onload = function () {
+              $('.preloader').addClass('is-loaded');
+              $('body').removeClass('body-locked');
+            };
+          }
+          this.data.imageCache[i].src = arr[preloadedFrames[i]];
         }
-        this.data.imageCache[i].src = arr[preloadedFrames[i]];
       }
     },
 
@@ -375,9 +378,10 @@ $(function () {
         _this.data.imageSprite.isLoaded = true;
         $('.preloader').addClass('is-loaded');
         $('body').removeClass('body-locked');
+        APP.Animation.data.background.addClass('should-use-sprite');
       };
       this.data.imageSprite.cached.src = 'images/sprite.png';
-    }
+    },
   }
 })(jQuery, window.APP);
 
@@ -476,6 +480,9 @@ $(function () {
       });
 
       this.data.reverseSections = $.extend([], _this.data.sections).reverse()
+
+      // set Scale Ratio based on updated params
+      this.setBackgroundScale();
     },
 
     animate: function () {
@@ -522,7 +529,6 @@ $(function () {
           curSection.frames[0],
           curSection.frames[1]
         ));
-
         this.setFrame(normalized, curSection)
         // var reverseNormalized = _this.data.frames.total - normalized;
 
@@ -535,6 +541,7 @@ $(function () {
     },
     setFrame: function (num, curSection) {
       // find in array of preloaded images
+      var _this = this;
       num = closestInArray(APP.PreloadImages.data.preloadedFramesIds, num);
       this.data.frames.current = num;
       // scip frames based on cached last
@@ -545,14 +552,13 @@ $(function () {
       if (framesDiff >= frameRate) {
         this.data.frames.lockedFrame = num;
 
-        var useSprite = false; // temp toggler
+        var useSprite = true; // toggler (for debug)
 
         // route sprite loader or direct png
         if (useSprite && APP.PreloadImages.data.imageSprite.isLoaded) {
-          var spriteClass = spritePath(num);
-          this.data.background.removeClass();
-          this.data.background.addClass(spriteClass);
-          this.data.background.attr('style', '');
+          var spriteData = dataPath(num);
+          this.data.background.attr('data-bg', spriteData);
+          this.data.background.removeStyle('background-image'); // clear background image
         } else {
           // update image
           var imgPath = imagePath(num);
@@ -562,6 +568,16 @@ $(function () {
         }
       }
     },
+    setBackgroundScale: function () {
+      var $backgroundEl = APP.Animation.data.background
+      var pheight = _window.height() - 75 - 55;
+      var iheight = 960;
+      var scaleV = pheight / iheight;
+
+      $backgroundEl.css({
+        'transform': 'scale(' + scaleV + ')'
+      });
+    }
   };
 })(jQuery, window.APP);
 
@@ -586,12 +602,12 @@ function normalize(value, fromMin, fromMax, toMin, toMax) {
 function imagePath(num) {
   var postfix = num >= 259 ? "_optimized" : ""
   return 'images/animation/1_' + (num).pad(4) + postfix + '.png'
-}
+};
 
-function spritePath(num) {
+function dataPath(num) {
   var postfix = num >= 259 ? "_optimized" : ""
-  return 'animation-bg-1_' + (num).pad(4) + postfix
-}
+  return '1_' + (num).pad(4) + postfix
+};
 
 // Add padding to numbers (a.k.a format by mask 00)
 // use (9).pad(2) // output - 09
@@ -617,5 +633,19 @@ function closestInArray(array, num) {
   }
   return ans;
 }
+
+// remove single attr from inline styles
+(function ($) {
+  $.fn.removeStyle = function (style) {
+    var search = new RegExp(style + '[^;]+;?', 'g');
+
+    return this.each(function () {
+      $(this).attr('style', function (i, style) {
+        return style && style.replace(search, '');
+      });
+    });
+  };
+}(jQuery));
+
 
 APP.PreloadImages.init();
