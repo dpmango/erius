@@ -328,7 +328,13 @@ $(function () {
           _this.data.imageSprite.isLoaded = true;
           $('.preloader').addClass('is-loaded');
           $('body').removeClass('body-locked');
-          APP.Animation.data.background.addClass('should-use-sprite');
+          if (APP.Animation.data.background) {
+            APP.Animation.data.background.addClass('should-use-sprite')
+          } else {
+            setTimeout(function () {
+              APP.Animation.data.background.addClass('should-use-sprite')
+            }, 500)
+          }
         };
         this.data.imageSprite.cached.src = 'images/sprite.png';
       }
@@ -494,6 +500,25 @@ $(function () {
       } else {
         this.setFrame(this.data.frames.total);
       }
+
+      // scroll buttons
+      $('.js-bubble').each(function (i, btn) {
+        var $btn = $(btn);
+        var $parent = $btn.parent();
+        var wScroll = _window.scrollTop();
+        var bpTop = $parent.offset().top - (_window.height() / 2);
+        var bpBottom = $parent.offset().top + $parent.height();
+
+        if ((wScroll > bpTop) && (wScroll < bpBottom)) {
+          $btn.css({
+            'transform': 'translate3d(0,' + (wScroll - $parent.offset().top) + 'px,0)'
+          });
+        } else {
+          $btn.css({
+            'transform': 'none'
+          });
+        }
+      });
 
     },
     setFrame: function (num, curSection) {
