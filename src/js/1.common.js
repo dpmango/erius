@@ -156,52 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
-  /* function smoothScroll(st) {
-  
-  Math.easeOut = function (t, b, c, d) { t /= d; return -c * t*(t-2) + b; };
-  
-  var interval, // scroll is being eased
-  mult = 0, // how fast do we scroll
-  dir = 0, // 1 = scroll down, -1 = scroll up
-  steps = 100, // how many steps in animation
-  length = 30; // how long to animate
-  function MouseWheelHandler(e) {
-  	if (!document.body.classList.contains('popup-is-opened')) {
-  		e.preventDefault(); // prevent default browser scroll
-  		clearInterval(interval); // cancel previous animation
-  		++mult; // we are going to scroll faster
-  		var delta = Math.max(-1, Math.min(1, (e.deltaY)));
-  		if(dir!=delta) { // scroll direction changed
-  			mult = 1; // start slowly
-  			dir = delta;
-  		}
-  		for(var tgt=e.target; tgt!=document.documentElement; tgt=tgt.parentNode) {
-  			var oldScroll = tgt.scrollTop;
-  			tgt.scrollTop+= delta;
-  			if(oldScroll!=tgt.scrollTop) break;
-  		}
-  		var start = tgt.scrollTop;
-  		var end = start + length*mult*delta; // where to end the scroll
-  		var change = end - start; // base change in one step
-  		var step = 0; // current step
-  		interval = setInterval(function() {
-  			var pos = Math.easeOut(step++,start,change,steps);
-  			// window.scrollTo(0,pos);
-  			tgt.scrollTop = pos;
-  			if(step>=steps) { // scroll finished without speed up - stop by easing out
-  				mult = 0;
-  				clearInterval(interval);
-  			}
-  		},10);
-  	}
-  }
-  
-  if (st) {
-  	document.addEventListener('wheel', MouseWheelHandler);
-  } else {
-  	document.removeEventListener('wheel', MouseWheelHandler);
-  }
-  } */
+
 
 
   (function initFun() {
@@ -212,12 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       window.removeEventListener('scroll', scrollBg);
     }
-    /* if ('onwheel' in document && window.innerWidth > 1000) {
-    smoothScroll(true);
-    } else {
-    smoothScroll(false);
-    } */
-
 
     window.addEventListener('winResized', initFun);
   })(); //popup init
